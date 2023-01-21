@@ -4,14 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <title>React App</title>
+
+    <style>
+        @font-face {
+            font-family: 'Hubot Sans';
+            src:
+                url('Hubot-Sans.woff2') format('woff2 supports variations'),
+                url('Hubot-Sans.woff2') format('woff2-variations');
+            font-weight: 500 600;
+            font-stretch: 100% 100%;
+        }
+        body {
+            overflow: hidden;
+            font-family: 'Hubot Sans';
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/08c3f952c9.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
 </html>
