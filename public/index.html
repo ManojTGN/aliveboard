@@ -16,9 +16,24 @@
             font-weight: 500 600;
             font-stretch: 100% 100%;
         }
-        body {
+        html,body, #root{
             overflow: hidden;
             font-family: 'Hubot Sans';
+            height:100%;
+            width:100%;
+        }
+        .draw-path{
+            fill:transparent;
+            stroke-linecap:round;
+        }
+        #SBContainer{
+            height:600px;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        #SBContainer::-webkit-scrollbar {
+            display: none;
         }
     </style>
     <script src="https://kit.fontawesome.com/08c3f952c9.js" crossorigin="anonymous"></script>
