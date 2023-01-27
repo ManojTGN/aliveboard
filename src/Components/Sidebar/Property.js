@@ -1,29 +1,16 @@
-import { Button, Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Form, Col, Container, InputGroup, Row } from "react-bootstrap";
 
-function Props({tool, prop, setProp}){
+export default function Property({tool,prop,setProp}){
+
     if(tool === 0)
     return (
         <div>
             <p>Paint Brush ( <i className="fa-solid fa-paintbrush"></i>  )</p>
-            <Card>
-                <p className="text-muted" style={{margin:'5px'}}>Preview</p>
-                <Card.Body style={{overflow:'hidden',justifyContent:'center',display:'flex',alignItems:'center'}}>
-                    <svg height="30px">
-                        <path className="draw-path" strokeLinejoin="round" strokeWidth={prop.brush.size} stroke={prop.brush.color} d=" M 2 6 L 3 6 L 4 6 L 6 6 L 8 6 L 11 6 L 15 6 L 20 6 L 27 6 L 35 6 L 44 6 L 54 6 L 63 6 L 71 6 L 79 6 L 87 6 L 94 6 L 99 6 L 103 6 L 108 6 L 112 6 L 116 6 L 119 6 L 123 6 L 126 6 L 129 6 L 132 6 L 136 6 L 139 6 L 142 6 L 146 6 L 149 6 L 153 6 L 157 6 L 160 6 L 163 6 L 166 6 L 170 6 L 173 6 L 177 6 L 180 6 L 182 6 L 185 6 L 187 6 L 189 6 L 190 6 L 191 6 L 192 6 L 193 6 L 194 6 L 195 6 L 196 6 L 197 6 L 198 6 L 199 6 L 201 6 L 204 6 L 206 6 L 208 6 L 210 6 L 211 6 L 213 6"></path>
-                    </svg>
-                </Card.Body>
-            </Card><br/>
             <Row>
                 <Col>
                 <InputGroup className="mb-3">
                     <InputGroup.Text> Size </InputGroup.Text>
-                    <Form.Control onChange={(e)=>{ setProp({'brush':{...prop['brush'],size:e.target.value}}); }} value={prop['brush']['size']} placeholder="px"/>
-                </InputGroup>
-                </Col>
-                <Col>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text> Gap </InputGroup.Text>
-                    <Form.Control onChange={(e)=>{ setProp({'brush':{...prop['brush'],gap:e.target.value}}); }} value={prop['brush']['gap']} placeholder="px"/>
+                    <Form.Control onChange={(e)=>{ setProp({'brush':{...prop['brush'],size:e.target.value}}); }} value={prop.brush.size} placeholder="px"/>
                 </InputGroup>
                 </Col>
             </Row>
@@ -73,7 +60,7 @@ function Props({tool, prop, setProp}){
             <Form.Check 
                 type={`checkbox`}
                 label={`Border`}
-                checked={prop['brush']['border']}
+                checked={prop.brush.border}
                 onClick={()=>{ setProp({'brush':{...prop['brush'],border:!prop.brush.border} });}}
                 onChange={()=>{}}
             />
@@ -89,7 +76,6 @@ function Props({tool, prop, setProp}){
                     <input onChange={(e)=>{ setProp({'brush':{...prop['brush'],'border-color':e.target.value}}) }} value={prop['brush']['border-color']} style={{width:'100%', height:'30px', border:'0', backgroundColor:prop['color']}} type="color"/>
                 </Col>
             </Row>
-
         </div>
     );
     
@@ -105,5 +91,3 @@ function Props({tool, prop, setProp}){
         </div>
     )
 }
-
-export default Props;
