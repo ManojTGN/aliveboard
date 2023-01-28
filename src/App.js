@@ -11,15 +11,16 @@ export default function App() {
     const [prop,setProp]= useState(
         {
             'brush':{
-                'size':'5.5',
+                'size':10,
                 'color':'#33F07B',
                 'brush':0,
                 'border':false,
-                'border-color':'#000000',
-                'border-width':'0'
+                'borderColor':'#000000',
+                'borderWidth':10
             },
             'eraser':{
-                'size':'5.5'
+                'size':5.5,
+                'color':'white'
             }
         }
     );

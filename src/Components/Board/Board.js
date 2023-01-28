@@ -28,7 +28,8 @@ export default function Board({prop,tool}){
         .catch((err) => {
             console.log("%c Unable To Communicate With The Server 😥","color:red;font-weight:bold;font-size:20px;background-color:black;");
             console.log(`%c Error:\n${err}`,"color:red;");
-            navigate(`/404`);
+            //navigate(`/404`);
+            navigate('../');
         });
 
     },[navigate,id]);
@@ -78,8 +79,43 @@ export default function Board({prop,tool}){
         });
     }
 
+    function brush(p5:P5){
+        p5.colorMode(p5.HSL, 360);
+        if(!prop.brush.border) p5.noStroke();
+
+        p5.fill(prop.brush.color);
+        p5.ellipse(p5.mouseX, p5.mouseY, prop.brush.size, prop.brush.size);
+
+        if(prop.brush.border){
+            p5.strokeCap(p5.SQUARE);
+            p5.smooth();
+            p5.stroke(prop.brush.borderColor);
+            p5.strokeWeight(prop.brush.size + prop.brush.borderWidth);
+            p5.line(lpos.x,lpos.y,p5.mouseX,p5.mouseY);
+            p5.noSmooth();
+        }
+
+        p5.stroke(prop.brush.color);
+        p5.strokeWeight(prop.brush.size);
+        p5.line(lpos.x,lpos.y,p5.mouseX,p5.mouseY);
+
+        setLpos({x:p5.mouseX,y:p5.mouseY,});
+    }
+
+    function eraser(p5:P5){
+        p5.noStroke();
+
+        p5.fill(prop.eraser.color);
+        p5.ellipse(p5.mouseX, p5.mouseY, prop.eraser.size, prop.eraser.size);
+
+        p5.stroke(prop.eraser.color);
+        p5.strokeWeight(prop.eraser.size);
+        p5.line(lpos.x,lpos.y,p5.mouseX,p5.mouseY);
+
+        setLpos({x:p5.mouseX,y:p5.mouseY});
+    }
+
     const mousePressed = (p5:P5) => {
-        //p5.cursor("https://cdn-icons-png.flaticon.com/32/77/77297.png");
         setLpos({x:p5.mouseX,y:p5.mouseY});
     }
 
@@ -90,18 +126,8 @@ export default function Board({prop,tool}){
     const mouseDragged = (p5:P5) => {
         if(tool === -1) return;
 
-        p5.colorMode(p5.HSL, 360);
-        p5.noStroke();
-
-        p5.fill(prop.brush.color);
-        p5.ellipse(p5.mouseX, p5.mouseY, prop.brush.size, prop.brush.size);
-
-        p5.stroke(prop.brush.color);
-        p5.strokeWeight(prop.brush.size);
-        p5.line(lpos.x,lpos.y,p5.mouseX,p5.mouseY);
-
-        setLpos({x:p5.mouseX,y:p5.mouseY});
-        
+        if      (tool ===  0) brush(p5);
+        else if (tool ===  1) eraser(p5);
         socket.emit('sDraw',getEmit(p5,tool));
     }
     
